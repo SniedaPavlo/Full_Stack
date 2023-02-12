@@ -20,7 +20,7 @@ app.post('/auth/login', (req, res) => {
     }, 'secretPPP')
 
     // отправляем обьект статуса и сам токен клиенту
-    req.json({
+    res.json({
         seccess: true,
         token
     })
