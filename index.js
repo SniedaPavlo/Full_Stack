@@ -1,5 +1,17 @@
 import express from 'express'
 import jwt from 'jsonwebtoken'
+import mongoose from 'mongoose'
+
+//подключение к базе данных с помощью mongoose
+mongoose.connect('mongodb+srv://tttt4444:<password>@cluster0.jrewfdh.mongodb.net/?retryWrites=true&w=majority'
+)
+    //проверка раельно подключились ли
+    .then(() => {
+        console.log('DB ok',)
+    }).catch((err) => {
+        console.log('DB err', err)
+    })
+
 //создание сервера с помощью библиотеки
 const app = express()
 
@@ -16,7 +28,7 @@ app.post('/auth/login', (req, res) => {
     //при приходе запроса генерируем токен и передаем информацию которую будем шифровать
     const token = jwt.sign({
         email: req.body.email,
-        fullName: 'Pavlo'
+        fullName: req.body.fullName
     }, 'secretPPP')
 
     // отправляем обьект статуса и сам токен клиенту
